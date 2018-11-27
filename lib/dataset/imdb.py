@@ -164,7 +164,6 @@ class IMDB(object):
         return roidb
 
     def get_flipped_entry(self, seg_rec):
-        print seg_rec['image']
         return {'image': self.flip_and_save(seg_rec['image']),
                 'seg_cls_path': self.flip_and_save(seg_rec['seg_cls_path']),
                 'height': seg_rec['height'],
@@ -242,6 +241,7 @@ class IMDB(object):
         [image_name, image_ext] = os.path.splitext(os.path.basename(image_path))
         image_dir = os.path.dirname(image_path)
         saved_image_path = os.path.join(image_dir, image_name + '_flip' + image_ext)
+        print saved_image_path
         try:
             flipped_image = Image.open(saved_image_path)
         except:
