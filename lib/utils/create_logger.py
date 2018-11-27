@@ -11,6 +11,7 @@ import time
 
 def create_logger(root_output_path, cfg, image_set):
     # set up logger
+    print root_output_path
     if not os.path.exists(root_output_path):
         os.makedirs(root_output_path)
     assert os.path.exists(root_output_path), '{} does not exist'.format(root_output_path)
