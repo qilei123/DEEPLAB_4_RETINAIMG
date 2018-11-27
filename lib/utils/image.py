@@ -92,6 +92,7 @@ def get_segmentation_image(segdb, config):
         print seg_cls_gt.shape
         seg_cls_gt, seg_cls_gt_scale = resize(
             seg_cls_gt, target_size, max_size, stride=config.network.IMAGE_STRIDE, interpolation=cv2.INTER_NEAREST)
+        print 'transform_seg_gt'
         seg_cls_gt_tensor = transform_seg_gt(seg_cls_gt)
 
         processed_ims.append(im_tensor)
