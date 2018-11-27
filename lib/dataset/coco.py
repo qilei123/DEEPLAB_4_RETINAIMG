@@ -312,6 +312,7 @@ class coco(IMDB):
                 overlaps[ix, cls] = 1.0
         image_path = os.path.join(self.data_path, self.data_name, im_ann['file_name'])
         print image_path
+        print self.mask_path_from_index(index)
         sds_rec = {'image': image_path,
                    'height': height,
                    'width': width,
@@ -320,7 +321,7 @@ class coco(IMDB):
                    'gt_overlaps': overlaps,
                    'max_classes': overlaps.argmax(axis=1),
                    'max_overlaps': overlaps.max(axis=1),
-                   'cache_seg_inst': self.mask_path_from_index(index),
+                   'ins_seg': self.mask_path_from_index(index),
                    'flipped': False}
         return sds_rec, objs
 
