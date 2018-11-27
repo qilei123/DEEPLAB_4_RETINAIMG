@@ -235,7 +235,8 @@ class TrainDataLoader(mx.io.DataIter):
         for idx, islice in enumerate(slices):
             isegdb = [segdb[i] for i in range(islice.start, islice.stop)]
             print len(isegdb)
-            multiprocess_results.append(self.pool.apply_async(parfetch, (self.config, self.crop_width, self.crop_height, isegdb)))
+            #multiprocess_results.append(self.pool.apply_async(parfetch, (self.config, self.crop_width, self.crop_height, isegdb)))
+            parfetch(self.config, self.crop_width, self.crop_height, isegdb)
 
         rst = [multiprocess_result.get() for multiprocess_result in multiprocess_results]
 
