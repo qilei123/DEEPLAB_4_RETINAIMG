@@ -9,6 +9,7 @@ import numpy as np
 import os
 import cv2
 import random
+import hickle as hkl
 from PIL import Image
 from bbox.bbox_transform import clip_boxes
 
@@ -46,6 +47,19 @@ def get_image(roidb, config):
         processed_roidb.append(new_rec)
     return processed_ims, processed_roidb
 
+def get_gt_masks(gt_mask_file):
+    """
+    This function load cached gt_masks from .hkl
+    :param roidb:
+    :return:
+    """
+    #assert os.path.exists(gt_mask_file), '%s does not exist'.format(gt_mask_file)
+    gt_masks = hkl.load(gt_mask_file)
+    num_mask = gt_masks.shape[0]
+    processed_masks = np.zeros((num_mask, gt_masks.shape[1], gt_masks.shape[2]))
+    for i in range(num_mask):
+        processed_masks[i,:,:] = cv2.resize(gt_masks[i].astype('float'), (gt_masks.shape[2], gt_masks.shape[1]))
+    return processed_masks
 
 def get_segmentation_image(segdb, config):
     """
@@ -73,7 +87,8 @@ def get_segmentation_image(segdb, config):
         im_info = [im_tensor.shape[2], im_tensor.shape[3], im_scale]
         new_rec['im_info'] = im_info
 
-        seg_cls_gt = np.array(Image.open(seg_rec['seg_cls_path']))
+        #seg_cls_gt = np.array(Image.open(seg_rec['seg_cls_path']))
+        seg_cls_gt = get_gt_masks(seg_rec['seg_cls_path'])
         seg_cls_gt, seg_cls_gt_scale = resize(
             seg_cls_gt, target_size, max_size, stride=config.network.IMAGE_STRIDE, interpolation=cv2.INTER_NEAREST)
         seg_cls_gt_tensor = transform_seg_gt(seg_cls_gt)
