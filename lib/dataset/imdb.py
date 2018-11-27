@@ -164,6 +164,7 @@ class IMDB(object):
         return roidb
 
     def get_flipped_entry(self, seg_rec):
+        print seg_rec['image']
         return {'image': self.flip_and_save(seg_rec['image']),
                 'seg_cls_path': self.flip_and_save(seg_rec['seg_cls_path']),
                 'height': seg_rec['height'],
@@ -183,8 +184,6 @@ class IMDB(object):
         pool_result = []
         for i in range(self.num_images):
             seg_rec = segdb[i]
-            print seg_rec['image']
-            print seg_rec['ins_seg']
             pool_result.append(pool.apply_async(get_flipped_entry_outclass_wrapper, args=(self, seg_rec, )))
             #self.get_flipped_entry(seg_rec, segdb_flip, i)
         print 'end0'
