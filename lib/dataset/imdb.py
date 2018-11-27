@@ -241,7 +241,8 @@ class IMDB(object):
         [image_name, image_ext] = os.path.splitext(os.path.basename(image_path))
         image_dir = os.path.dirname(image_path)
         saved_image_path = os.path.join(image_dir, image_name + '_flip' + image_ext)
-        print saved_image_path
+        if os.path.exists(saved_image_path):
+            return saved_image_path
         try:
             flipped_image = Image.open(saved_image_path)
         except:
