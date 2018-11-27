@@ -179,19 +179,19 @@ class IMDB(object):
         """
         print 'append flipped images to segdb'
         assert self.num_images == len(segdb)
-        pool = Pool(processes=10)
-        pool_result = []
+        #pool = Pool(processes=10)
+        #pool_result = []
         for i in range(self.num_images):
             seg_rec = segdb[i]
-            pool_result.append(pool.apply_async(get_flipped_entry_outclass_wrapper, args=(self, seg_rec, )))
-            #self.get_flipped_entry(seg_rec, segdb_flip, i)
-        print 'end0'
-        pool.close()
-        print 'end1'
-        pool.join()
-        print 'end2'
-        segdb_flip = [res_instance.get() for res_instance in pool_result]
-        segdb += segdb_flip
+            #pool_result.append(pool.apply_async(get_flipped_entry_outclass_wrapper, args=(self, seg_rec, )))
+            segdb.append(self.get_flipped_entry(seg_rec))
+        #print 'end0'
+        #pool.close()
+        #print 'end1'
+        #pool.join()
+        #print 'end2'
+        #segdb_flip = [res_instance.get() for res_instance in pool_result]
+        #segdb += segdb_flip
         self.image_set_index *= 2
         return segdb
 
