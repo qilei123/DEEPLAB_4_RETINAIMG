@@ -182,9 +182,9 @@ class IMDB(object):
         pool = Pool(processes=1)
         pool_result = []
         for i in range(self.num_images):
+            seg_rec = segdb[i]
             print seg_rec['image']
             print seg_rec['ins_seg']
-            seg_rec = segdb[i]
             pool_result.append(pool.apply_async(get_flipped_entry_outclass_wrapper, args=(self, seg_rec, )))
             #self.get_flipped_entry(seg_rec, segdb_flip, i)
         pool.close()
