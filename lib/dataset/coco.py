@@ -77,7 +77,7 @@ def generate_cache_seg_inst_kernel(annWithObjs):
     """
     ann = annWithObjs[0]      # the dictionary
     objs = annWithObjs[1]     # objs
-    gt_mask_file = ann['ins_seg']
+    gt_mask_file = ann['seg_cls_path']
     if not gt_mask_file:
         return
     gt_mask_flip_file = os.path.join(os.path.splitext(gt_mask_file)[0] + '_flip.hkl')
@@ -319,7 +319,7 @@ class coco(IMDB):
                    'gt_overlaps': overlaps,
                    'max_classes': overlaps.argmax(axis=1),
                    'max_overlaps': overlaps.max(axis=1),
-                   'ins_seg': self.mask_path_from_index(index),
+                   'seg_cls_path': self.mask_path_from_index(index),
                    'flipped': False}
         return sds_rec, objs
 
