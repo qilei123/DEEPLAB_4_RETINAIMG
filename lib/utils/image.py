@@ -89,6 +89,7 @@ def get_segmentation_image(segdb, config):
 
         #seg_cls_gt = np.array(Image.open(seg_rec['seg_cls_path']))
         seg_cls_gt = get_gt_masks(seg_rec['seg_cls_path'])
+        print seg_cls_gt.shape
         seg_cls_gt, seg_cls_gt_scale = resize(
             seg_cls_gt, target_size, max_size, stride=config.network.IMAGE_STRIDE, interpolation=cv2.INTER_NEAREST)
         seg_cls_gt_tensor = transform_seg_gt(seg_cls_gt)
