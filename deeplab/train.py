@@ -78,8 +78,9 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch, lr, 
     segdbs = [load_gt_segdb(config.dataset.dataset, image_set, config.dataset.root_path, config.dataset.dataset_path,
                             result_path=final_output_path, flip=config.TRAIN.FLIP)
               for image_set in image_sets]
+    print 'start merge_segdb'
     segdb = merge_segdb(segdbs)
-
+    print 'start TrainDataLoader'
     # load training data
     train_data = TrainDataLoader(sym, segdb, config, batch_size=input_batch_size, crop_height=config.TRAIN.CROP_HEIGHT, crop_width=config.TRAIN.CROP_WIDTH,
                                  shuffle=config.TRAIN.SHUFFLE, ctx=ctx)
