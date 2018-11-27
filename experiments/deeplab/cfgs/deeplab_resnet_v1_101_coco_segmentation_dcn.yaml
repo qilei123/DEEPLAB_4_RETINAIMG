@@ -1,6 +1,6 @@
 ---
 MXNET_VERSION: "mxnet"
-output_path: "/home/qilei123/data0/RetinaImg/DR_COCO/output/baseline3"
+output_path: "/home/qileimail123/data0/RetinaImg/DR_COCO/output/baseline3"
 symbol: resnet_v1_101_deeplab_dcn
 gpus: '0'
 SCALES:
@@ -12,9 +12,9 @@ default:
 dataset:
   NUM_CLASSES: 11
   dataset: coco
-  dataset_path: "/home/qilei123/data0/RetinaImg/DR_COCO/"
+  dataset_path: "/home/qileimail123/data0/RetinaImg/DR_COCO/"
   image_set: train2014
-  root_path: "/home/qilei123/data0/RetinaImg/"
+  root_path: "/home/qileimail123/data0/RetinaImg/"
   test_image_set: val2014
 network:
   FIXED_PARAMS:
