@@ -159,7 +159,7 @@ class coco(IMDB):
 
         return gt_roidb
 
-    def gt_sdsdb(self):
+    def gt_segdb(self):
         """
         :return:
         """
